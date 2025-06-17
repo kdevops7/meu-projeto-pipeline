@@ -1,0 +1,25 @@
+name: Build e Deploy Simples
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar código
+      uses: actions/checkout@v3
+
+    - name: Listar arquivos
+      run: ls -lah
+
+    - name: Simular build (compactar arquivos)
+      run: zip -r site.zip *
+
+    - name: Simular deploy (mover para pasta simulada)
+      run: |
+        mkdir deploy_simulado
+        unzip site.zip -d deploy_simulado
+        echo "Arquivos implantados em deploy_simulado/"
